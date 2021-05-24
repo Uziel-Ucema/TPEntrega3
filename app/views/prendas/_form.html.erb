@@ -1,0 +1,37 @@
+<div id="create-item">
+    <div class="create-item-container">
+        <h2 class="create-title-contact">Crear prenda</h2>
+            <div class="create-form">
+                <h1> <%= text %></h1>
+                <%= form_for prenda do |f|%>
+
+                    <%= f.label :tipo,{class:'form-items-title' }  %><br><br>
+                    <%= f.select :tipo, Prenda.tipos.keys, {}, {class:'form-items', prompt: "Please Select" } %><br>
+                    
+                    <%= f.label :categoria,{class:'form-items-title' }  %><br><br>
+                    <%= f.select :categoria, Prenda.categoria.keys, {},{class:'form-items' } %><br>
+
+                    <%= f.label :material,{class:'form-items-title' }  %><br><br>
+                    <%= f.select :material, Prenda.materials.keys, {},{class:'form-items' } %><br>
+
+                    <%= f.label :color_primario,{class:'form-items-title' }  %>
+                    <%= f.color_field :color_primario%>
+
+                    <%= f.label :color_secundario,{class:'form-items-title' }  %>
+                    <%= f.color_field :color_secundario %><br>
+                        
+                    <br><%= f.label :imagen,{class:'form-items-title' }  %><br>
+                    <%= f.file_field :imagen, {class:'btn-item-image'}%>
+                    <% if @prenda.imagen.attached? %>
+                        <%= f.label :imagen,{class:'form-items-title' }  %>
+                        <%= image_tag(@prenda.imagen) %>
+                    <%end %>
+                    
+                    <div class="edit-form-submit-buttons">
+                    <%= f.submit 'Guardar', {class:'btn-save-changes'} %>
+                    <%= link_to "<button>Cancelar</button>".html_safe, prendas_path(@prenda) , class: 'btn-save-changes-cancel'%>
+                    </div>
+                <%end%>
+            </div>            
+    </div>
+</div>
